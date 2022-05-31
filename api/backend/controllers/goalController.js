@@ -1,7 +1,5 @@
 const getGoals = (req, res) => {
-  res.status(200).json({ message: "Get goals" });
+  res.status(200).json({ message: "Get goals through controller" });
 };
 
-module.exports = {
-  getGoals,
-};
+export default getGoals;
