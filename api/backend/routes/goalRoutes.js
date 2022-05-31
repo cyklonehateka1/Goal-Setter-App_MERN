@@ -7,12 +7,8 @@ import {
   updateGoal,
 } from "../controllers/goalController.js";
 
-router.get("/", getGoals);
+router.route("/").get(getGoals).post(setGoal);
 
-router.post("/", setGoal);
-
-router.put("/:id", updateGoal);
-
-router.delete("/:id", deleteGoal);
+router.route("/:id").put(updateGoal).delete(deleteGoal);
 
 export default router;

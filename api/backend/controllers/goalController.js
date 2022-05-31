@@ -9,14 +9,20 @@ export const getGoals = (req, res) => {
 // @route     POST /api/goals
 // @access    Private
 export const setGoal = (req, res) => {
+  if (!req.body.text) {
+    res.status(400);
+    throw new Error("yi wo dross");
+  }
   res.status(200).json({ message: "This is my freaking goal" });
 };
+
 // @desc      Update goal
 // @route     PUT /api/goals/:id
 // @access    Private
 export const updateGoal = (req, res) => {
   res.status(200).json({ message: `This is my body count: ${req.params.id}` });
 };
+
 // @desc      Delete goal
 // @route     DELETE /api/goals/:id
 // @access    Private
