@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import goalRoutes from "./routes/goalRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import errorHandler from "./middlewares/errorMiddleware.js";
 import connectDB from "./config/db.js";
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/goals", goalRoutes);
+app.use("/api/goals", userRoutes);
 
 app.use(errorHandler);
 
