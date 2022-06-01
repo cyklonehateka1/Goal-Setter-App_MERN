@@ -38,20 +38,28 @@ export const updateGoal = expressAsyncHandler(async (req, res) => {
   }
 
   const updatedGoal = await goalModel.findByIdAndUpdate(
-    req.params.id.req.body,
+    req.params.id,
+    req.body,
     {
       new: true,
     }
   );
 
-  res.status(200).json({ message: `This is my body count: ${req.params.id}` });
+  res.status(200).json(updatedGoal);
 });
 
 // @desc      Delete goal
 // @route     DELETE /api/goals/:id
 // @access    Private
 export const deleteGoal = expressAsyncHandler(async (req, res) => {
-  res
-    .status(200)
-    .json({ message: `I don't know what to type ooo ${req.params.id}` });
+  const goal = await goalModel.findById(req.params.id);
+
+  if (!goal) {
+    res.status(400);
+    throw new Error("Goal not found");
+  }
+
+  await goal.remove();
+
+  res.status(200).json({ id: req.params.id });
 });
