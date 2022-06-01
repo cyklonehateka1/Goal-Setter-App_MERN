@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/goals", goalRoutes);
-app.use("/api/goals", userRoutes);
+app.use("/api/users", userRoutes);
 
 app.use(errorHandler);
 
