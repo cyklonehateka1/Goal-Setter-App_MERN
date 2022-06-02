@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jsonwebtoken from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
 import userModel from "../models/userModel.js";
@@ -37,6 +37,7 @@ export const registerUser = expressAsyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -57,6 +58,7 @@ export const loginUser = expressAsyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -66,7 +68,14 @@ export const loginUser = expressAsyncHandler(async (req, res) => {
 
 // @desc      Get user data
 // @route     GET /api/users/me
-// @access    Public
+// @access    Private
 export const getMe = expressAsyncHandler(async (req, res) => {
   res.json({ message: "my profile" });
 });
+
+// Generate JWT token
+const generateToken = (id) => {
+  return jsonwebtoken.sign({ id }, process.env.JWT_SEC, {
+    expiresIn: "30d",
+  });
+};
