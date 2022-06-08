@@ -19,5 +19,5 @@ app.use(errorHandler);
 
 app.listen(port, () => {
   connectDB();
-  console.log(`Server started on port ${port}`);
+  console.log(`Servers started on port ${port}`);
 });
